@@ -98,7 +98,13 @@
             <div class="content w-full">
                 <!-- start head-->
                 <div class="head bg-white p-15 between-flex">
+                    <div class="menu">
+                        <div class="bar1"></div>
+                        <div class="bar2"></div>
+                        <div class="bar3"></div>
+                    </div>
                     <div class="search p-relative">
+                        <i class="fa fa-search" onclick="search()"></i>
                         <input
                             class="p-10"
                             type="search"
@@ -118,6 +124,190 @@
                 </div>
                 <!-- end head-->
                 <h1 class="p-relative">Plans</h1>
+                <div class="plans-page d-grid gap-20 m-20">
+                    <div class="plan bg-white rad-10 p-20 green">
+                        <div class="top bg-green c-white txt-c p-20 mb-15">
+                            <h2 class="m-0 d-block">Free</h2>
+                            <div class="price p-relative">
+                                <span>$</span>
+                                0.00
+                            </div>
+                        </div>
+                        <ul class="m-0">
+                            <li>
+                                <i class="fa-solid fa-check fa-fw c-green"></i>
+                                <span>Access All Text Lessons </span>
+                                <i class="fa-solid fa-info-circle c-grey"></i>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check fa-fw c-green"></i>
+                                <span>Access All Videos Lessons </span>
+                                <i class="fa-solid fa-info-circle c-grey"></i>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check fa-fw c-green"></i>
+                                <span>Appear On Leaderboard </span>
+                                <i class="fa-solid fa-info-circle c-grey"></i>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-xmark fa-fw c-red"></i>
+                                <span>Browse Content Without Ads </span>
+                                <i class="fa-solid fa-info-circle c-grey"></i>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-xmark fa-fw c-red"></i>
+                                <span>Access All Assignments </span>
+                                <i class="fa-solid fa-info-circle c-grey"></i>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-xmark fa-fw c-red"></i>
+                                <span>Get Daily Prizes </span>
+                                <i class="fa-solid fa-info-circle c-grey"></i>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-xmark fa-fw c-red"></i>
+                                <span>Earn Certificate </span>
+                                <i class="fa-solid fa-info-circle c-grey"></i>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-xmark fa-fw c-red"></i>
+                                <span>1 GB Space For Hosting Files </span>
+                                <i class="fa-solid fa-info-circle c-grey"></i>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-xmark fa-fw c-red"></i>
+                                <span>Access Badge System </span>
+                                <i class="fa-solid fa-info-circle c-grey"></i>
+                            </li>
+                        </ul>
+                        <a
+                            class="btn-shape bg-green c-white mt-15 d-block w-fit"
+                            href="#"
+                            >Join</a
+                        >
+                    </div>
+                    <div class="plan bg-white rad-10 p-20 blue">
+                        <div class="top bg-blue c-white txt-c p-20 mb-15">
+                            <h2 class="m-0 d-block">Basic</h2>
+                            <div class="price p-relative">
+                                <span>$</span>
+                                7.99
+                            </div>
+                        </div>
+                        <ul class="m-0">
+                            <li>
+                                <i class="fa-solid fa-check fa-fw c-green"></i>
+                                <span>Access All Text Lessons </span>
+                                <i class="fa-solid fa-info-circle c-grey"></i>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check fa-fw c-green"></i>
+                                <span>Access All Videos Lessons </span>
+                                <i class="fa-solid fa-info-circle c-grey"></i>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check fa-fw c-green"></i>
+                                <span>Appear On Leaderboard </span>
+                                <i class="fa-solid fa-info-circle c-grey"></i>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check fa-fw c-green"></i>
+                                <span>Browse Content Without Ads </span>
+                                <i class="fa-solid fa-info-circle c-grey"></i>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check fa-fw c-green"></i>
+                                <span>Access All Assignments </span>
+                                <i class="fa-solid fa-info-circle c-grey"></i>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check fa-fw c-green"></i>
+                                <span>Get Daily Prizes </span>
+                                <i class="fa-solid fa-info-circle c-grey"></i>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check fa-fw c-green"></i>
+                                <span>Earn Certificate </span>
+                                <i class="fa-solid fa-info-circle c-grey"></i>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-xmark fa-fw c-red"></i>
+                                <span>1 GB Space For Hosting Files </span>
+                                <i class="fa-solid fa-info-circle c-grey"></i>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-xmark fa-fw c-red"></i>
+                                <span>Access Badge System </span>
+                                <i class="fa-solid fa-info-circle c-grey"></i>
+                            </li>
+                        </ul>
+                        <a
+                            class="btn-shape bg-blue c-white mt-15 d-block w-fit"
+                            href="#"
+                            >Join</a
+                        >
+                    </div>
+
+                    <div class="plan bg-white rad-10 p-20 orange">
+                        <div class="top bg-orange c-white txt-c p-20 mb-15">
+                            <h2 class="m-0 d-block">Premium</h2>
+                            <div class="price p-relative">
+                                <span>$</span>
+                                19.99
+                            </div>
+                        </div>
+                        <ul class="m-0">
+                            <li>
+                                <i class="fa-solid fa-check fa-fw c-green"></i>
+                                <span>Access All Text Lessons </span>
+                                <i class="fa-solid fa-info-circle c-grey"></i>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check fa-fw c-green"></i>
+                                <span>Access All Videos Lessons </span>
+                                <i class="fa-solid fa-info-circle c-grey"></i>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check fa-fw c-green"></i>
+                                <span>Appear On Leaderboard </span>
+                                <i class="fa-solid fa-info-circle c-grey"></i>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check fa-fw c-green"></i>
+                                <span>Browse Content Without Ads </span>
+                                <i class="fa-solid fa-info-circle c-grey"></i>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check fa-fw c-green"></i>
+                                <span>Access All Assignments </span>
+                                <i class="fa-solid fa-info-circle c-grey"></i>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check fa-fw c-green"></i>
+                                <span>Get Daily Prizes </span>
+                                <i class="fa-solid fa-info-circle c-grey"></i>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check fa-fw c-green"></i>
+                                <span>Earn Certificate </span>
+                                <i class="fa-solid fa-info-circle c-grey"></i>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check fa-fw c-green"></i>
+                                <span>1 GB Space For Hosting Files </span>
+                                <i class="fa-solid fa-info-circle c-grey"></i>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check fa-fw c-green"></i>
+                                <span>Access Badge System </span>
+                                <i class="fa-solid fa-info-circle c-grey"></i>
+                            </li>
+                        </ul>
+                        <p class="c-grey m-0 txt-c mt-15">
+                            This Is Your Current Plan
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="parent">

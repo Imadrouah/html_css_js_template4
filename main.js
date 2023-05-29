@@ -1,18 +1,64 @@
-let currentPage = document.querySelector("head > title").innerHTML;
-let h = document.querySelector(".page h1");
-let par = document.querySelector("body > .parent");
-let goTop = document.createElement("div");
-let fire = document.createElement("span");
+let currentPage = document.querySelector("head > title").innerHTML,
+    h = document.querySelector(".page h1"),
+    par = document.querySelector("body > .parent"),
+    goTop = document.createElement("div"),
+    fire = document.createElement("span"),
+    sidebar = document.querySelector(".sidebar");
 
+// window load
+window.addEventListener("load", () => {
+    meta.content = localStorage.getItem("theme");
+    theme = localStorage.getItem("theme");
+    setTimeout(() => {
+        h.classList.add("hover");
+    }, 10);
+    if (currentPage === "Settings") {
+        if (meta.content === "dark") {
+            checkbox.setAttribute("checked", "");
+            checkbox.classList.add("dark");
+        } else {
+            checkbox.removeAttribute("checked");
+            checkbox.classList.remove("dark");
+        }
+    }
+    if (currentPage === "Dashboard") {
+        if (localStorage.getItem("like") === "true") {
+            heartIcon.classList.remove("fa-regular");
+            heartIcon.classList.add("fa", "c-red");
+        } else {
+            heartIcon.classList.remove("fa", "c-red");
+            heartIcon.classList.add("fa-regular");
+        }
+    }
+    click = localStorage.getItem("notiClick");
+    if (localStorage.getItem("notiClick") === "true") {
+        notification.classList.add("clicked");
+    } else {
+        notification.classList.remove("clicked");
+    }
+    setTimeout(() => {
+        notification.classList.remove("clicked");
+        localStorage.setItem("notiClick", false);
+    }, 20000);
+    darkLight();
+});
+
+//scroll to top
 goTop.classList.add("scroll-to-top");
 fire.classList.add("fire");
-document.body.id = "top";
 document.querySelector(".content").append(goTop);
 goTop.append(fire);
-//scroll to top
-// goTop.title = "Rise To The Summit";
+
+window.addEventListener("scroll", () => {
+    if (window.scrollY >= 600) {
+        goTop.classList.add("active");
+    } else {
+        goTop.classList.remove("active");
+    }
+});
+
 goTop.addEventListener("click", function () {
-    location.href = "#top";
+    window.scrollTo({ left: 0, top: 0 });
     goTop.style.setProperty("bottom", "85vh");
     setTimeout(function () {
         goTop.style.setProperty("bottom", "40px");
@@ -21,8 +67,8 @@ goTop.addEventListener("click", function () {
 
 //post like / task delete
 let like;
-const deleteIcon = document.querySelector(".icon-done");
-const heartIcon = document.querySelector(".heart");
+const deleteIcon = document.querySelector(".icon-done"),
+    heartIcon = document.querySelector(".heart");
 
 if (currentPage === "Dashboard") {
     deleteIcon.addEventListener("click", function () {
@@ -43,10 +89,10 @@ if (currentPage === "Dashboard") {
 }
 
 //theme change
-let darkModeOn = false;
-let theme;
-let meta = document.getElementById("meta");
-let checkbox = document.querySelector(".toggle-checkbox");
+let meta = document.getElementById("meta"),
+    checkbox = document.querySelector(".toggle-checkbox"),
+    darkModeOn = false,
+    theme;
 
 if (currentPage === "Settings") {
     checkbox.onclick = function () {
@@ -74,23 +120,23 @@ function change() {
 
 const root = document.documentElement;
 //light colors
-let mainLight = getComputedStyle(root).getPropertyValue("--main-color");
-let lightBlue = getComputedStyle(root).getPropertyValue("--blue-color");
-let lightBlueAlt = getComputedStyle(root).getPropertyValue("--blue-alt-color");
-let lightOrange = getComputedStyle(root).getPropertyValue("--orange-color");
-let lightGreen = getComputedStyle(root).getPropertyValue("--green-color");
-let lightRed = getComputedStyle(root).getPropertyValue("--red-color");
-let lightWhite = getComputedStyle(root).getPropertyValue("--white-color");
+let mainLight = getComputedStyle(root).getPropertyValue("--main-color"),
+    lightBlue = getComputedStyle(root).getPropertyValue("--blue-color"),
+    lightBlueAlt = getComputedStyle(root).getPropertyValue("--blue-alt-color"),
+    lightOrange = getComputedStyle(root).getPropertyValue("--orange-color"),
+    lightGreen = getComputedStyle(root).getPropertyValue("--green-color"),
+    lightRed = getComputedStyle(root).getPropertyValue("--red-color"),
+    lightWhite = getComputedStyle(root).getPropertyValue("--white-color");
 //dark color
-let mainDark = getComputedStyle(root).getPropertyValue("--main-color-dark");
-let darkBlue = getComputedStyle(root).getPropertyValue("--blue-color-dark");
-let darkBlueAlt = getComputedStyle(root).getPropertyValue(
-    "--blue-alt-color-dark"
-);
-let darkOrange = getComputedStyle(root).getPropertyValue("--orange-color-dark");
-let darkGreen = getComputedStyle(root).getPropertyValue("--green-color-dark");
-let darkRed = getComputedStyle(root).getPropertyValue("--red-color-dark");
-let darkWhite = getComputedStyle(root).getPropertyValue("--white-color-dark");
+let mainDark = getComputedStyle(root).getPropertyValue("--main-color-dark"),
+    darkBlue = getComputedStyle(root).getPropertyValue("--blue-color-dark"),
+    darkBlueAlt = getComputedStyle(root).getPropertyValue(
+        "--blue-alt-color-dark"
+    ),
+    darkOrange = getComputedStyle(root).getPropertyValue("--orange-color-dark"),
+    darkGreen = getComputedStyle(root).getPropertyValue("--green-color-dark"),
+    darkRed = getComputedStyle(root).getPropertyValue("--red-color-dark"),
+    darkWhite = getComputedStyle(root).getPropertyValue("--white-color-dark");
 
 let rootName = [
     "--main-color",
@@ -103,23 +149,23 @@ let rootName = [
 ];
 //colors value
 let lightArr = [
-    mainLight,
-    lightBlue,
-    lightBlueAlt,
-    lightOrange,
-    lightGreen,
-    lightRed,
-    lightWhite,
-];
-let darkArr = [
-    mainDark,
-    darkBlue,
-    darkBlueAlt,
-    darkOrange,
-    darkGreen,
-    darkRed,
-    darkWhite,
-];
+        mainLight,
+        lightBlue,
+        lightBlueAlt,
+        lightOrange,
+        lightGreen,
+        lightRed,
+        lightWhite,
+    ],
+    darkArr = [
+        mainDark,
+        darkBlue,
+        darkBlueAlt,
+        darkOrange,
+        darkGreen,
+        darkRed,
+        darkWhite,
+    ];
 
 function darkLight() {
     rootName.forEach(function (name, i) {
@@ -128,7 +174,7 @@ function darkLight() {
             document.body.classList.remove("light");
             document
                 .querySelector(".sidebar")
-                .style.setProperty("background-color", "#a1a1a1bf");
+                .style.setProperty("background-color", "#a1a1a1a6");
             root.style.setProperty(name, darkArr[i]);
             document.querySelectorAll(".bg-eee").forEach((ele) => {
                 ele.style.backgroundColor = "#3f444a";
@@ -146,87 +192,28 @@ function darkLight() {
         }
     });
 }
-window.addEventListener("load", () => {
-    meta.content = localStorage.getItem("theme");
-    theme = localStorage.getItem("theme");
-
-    setTimeout(() => {
-        h.classList.add("hover");
-    }, 10);
-    if (currentPage === "Settings") {
-        if (meta.content === "dark") {
-            checkbox.setAttribute("checked", "");
-            checkbox.classList.add("dark");
-        } else {
-            checkbox.removeAttribute("checked");
-            checkbox.classList.remove("dark");
-        }
-    }
-    if (currentPage === "Dashboard") {
-        if (localStorage.getItem("like") === "true") {
-            heartIcon.classList.remove("fa-regular");
-            heartIcon.classList.add("fa", "c-red");
-        } else {
-            heartIcon.classList.remove("fa", "c-red");
-            heartIcon.classList.add("fa-regular");
-        }
-    }
-});
-
-window.addEventListener("load", function () {
-    click = localStorage.getItem("notiClick");
-    if (localStorage.getItem("notiClick") === "true") {
-        notification.classList.add("clicked");
-    } else {
-        notification.classList.remove("clicked");
-    }
-    setTimeout(() => {
-        notification.classList.remove("clicked");
-        localStorage.setItem("notiClick", false);
-    }, 10000);
-    darkLight();
-    showPreloader();
-    setTimeout(() => {
-        hidePreloader();
-    }, 200);
-});
-
-//loader intro
-function showPreloader() {
-    par.style.display = "flex";
-}
-function hidePreloader() {
-    par.style.display = "none";
-}
-window.addEventListener("scroll", () => {
-    if (window.scrollY > 400) {
-        goTop.classList.add("active");
-    } else {
-        goTop.classList.remove("active");
-    }
-});
 
 //notification
-let notification = document.querySelector(".notification");
-let not = document.createElement("div");
-let headNoti = document.createElement("h3");
-let notiHolder = document.createElement("div");
-let closeNoti = document.createElement("span");
-let click = false;
-let spanNoti = document.createElement("span");
+let notification = document.querySelector(".notification"),
+    not = document.createElement("div"),
+    headNoti = document.createElement("h3"),
+    notiHolder = document.createElement("div"),
+    closeNoti = document.createElement("span"),
+    click = false,
+    spanNoti = document.createElement("span");
 
 notiHolder.classList.add("notification-content");
 closeNoti.innerText = "Close";
 closeNoti.classList.add("close", "bg-blue", "c-white");
 headNoti.innerText = "Notifications";
 not.classList.add("notification-div");
-spanNoti.innerText = "Hey Boii, You Have No New Notification";
+spanNoti.innerText = "You Have No New Notification";
 
 not.append(headNoti);
-not.append(closeNoti);
-document.body.prepend(not);
 notiHolder.append(spanNoti);
 not.append(notiHolder);
+not.append(closeNoti);
+document.body.prepend(not);
 
 notification.addEventListener("click", (e) => {
     click = true;
@@ -238,19 +225,16 @@ notification.addEventListener("click", (e) => {
     }
     localStorage.setItem("notiClick", click);
 });
+
 closeNoti.addEventListener("click", () => {
-    setTimeout(() => {
-        notification.classList.remove("clicked");
-        localStorage.setItem("notiClick", false);
-    }, 10000);
     not.classList.remove("active");
 });
 
 //time
-let divTime = document.createElement("div");
-let spanTime = document.createElement("span");
-let spanMonth = document.createElement("span");
-let spanDay = document.createElement("span");
+let divTime = document.createElement("div"),
+    spanTime = document.createElement("span"),
+    spanMonth = document.createElement("span"),
+    spanDay = document.createElement("span");
 
 spanTime.id = "span-date";
 spanDay.id = "span-day";
@@ -261,40 +245,33 @@ divTime.append(spanTime);
 divTime.append(spanMonth);
 divTime.append(spanDay);
 
-document.querySelector(".sidebar").append(divTime);
+sidebar.append(divTime);
+
 const currentDateElement = document.getElementById("span-date");
 
-// function updateCurrentDate() {
-//     const currentDAte = new Date();
-//     // const options = { weekday: "long", year: "numeric", day: "numeric" };
-//     // const formattedDate = currentDAte.toLocaleTimeString("en-US", options);
-//     const formattedTime = currentDAte.toLocaleTimeString("en-US");
-//     // const formattedDateTime = `${formattedDate} - ${formattedTime}`;
-// }
-
 const shortMonthNames = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-];
-const shortDayNames = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-];
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+    ],
+    shortDayNames = [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+    ];
 
 function updateTime() {
     const currentTime = new Date();
@@ -310,7 +287,11 @@ function updateTime() {
     if (hours > "12") {
         hours -= 12;
     } else if (hours.toString().length == 1) {
-        hours = `0${hours}`;
+        if (hours == 0) {
+            hours = 12;
+        } else {
+            hours = `0${hours}`;
+        }
     }
     if (seconds.toString().length == 1) {
         seconds = `0${seconds}`;
@@ -327,3 +308,62 @@ function updateTime() {
 }
 updateTime();
 setInterval(updateTime, 1000);
+
+//open side bar on mobile
+
+let menu = document.querySelector(".menu");
+menu.addEventListener("click", () => {
+    menu.classList.toggle("active");
+    if (menu.classList.contains("active")) {
+        sidebar.classList.add("open-side");
+    } else {
+        sidebar.classList.remove("open-side");
+    }
+});
+window.addEventListener("scroll", () => {
+    menu.classList.remove("active");
+    sidebar.classList.remove("open-side");
+});
+
+//new features on 5/27
+
+function search() {
+    let search = document
+        .querySelector(".search > input")
+        .value.toLocaleLowerCase();
+    let elements = document.querySelectorAll(".page .content *");
+    let results = [];
+
+    if (search != "") {
+        for (let i = 0; i < elements.length; i++) {
+            let walker = document.createTreeWalker(
+                elements[i],
+                NodeFilter.SHOW_TEXT,
+                null,
+                false
+            );
+
+            while (walker.nextNode()) {
+                let node = walker.currentNode;
+                let nodeContent = node.textContent.toLocaleLowerCase();
+                if (nodeContent.indexOf(search) !== -1) {
+                    let span = document.createElement("span");
+                    span.classList.add("highlight");
+                    results.push(span);
+                    let highlightedText = nodeContent.replace(
+                        new RegExp(search, "gi"),
+                        (match) => `<span class="highlight">${match}</span>`
+                    );
+                    span.innerHTML = highlightedText;
+                    node.parentNode.replaceChild(span, node);
+                }
+            }
+        }
+        results[0].scrollIntoView();
+    }
+}
+document.querySelector(".search > input").addEventListener("keyup", (e) => {
+    if (e.key === "Enter") {
+        document.querySelector(".fa-search").click();
+    }
+});
