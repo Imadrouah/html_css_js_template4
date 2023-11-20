@@ -3,122 +3,25 @@ let currentPage = document.querySelector("head > title").innerHTML,
     par = document.querySelector("body > .parent"),
     goTop = document.createElement("div"),
     fire = document.createElement("span"),
-    sidebar = document.querySelector(".sidebar");
+    sidebar = document.querySelector(".sidebar"),
+    like,
+    menu = document.querySelector(".menu");
 
-// window load
-window.addEventListener("load", () => {
-    meta.content = localStorage.getItem("theme");
-    theme = localStorage.getItem("theme");
-    setTimeout(() => {
-        h.classList.add("hover");
-    }, 10);
-    if (currentPage === "Settings") {
-        if (meta.content === "dark") {
-            checkbox.setAttribute("checked", "");
-            checkbox.classList.add("dark");
-        } else {
-            checkbox.removeAttribute("checked");
-            checkbox.classList.remove("dark");
-        }
-    }
-    if (currentPage === "Dashboard") {
-        if (localStorage.getItem("like") === "true") {
-            heartIcon.classList.remove("fa-regular");
-            heartIcon.classList.add("fa", "c-red");
-        } else {
-            heartIcon.classList.remove("fa", "c-red");
-            heartIcon.classList.add("fa-regular");
-        }
-    }
-    click = localStorage.getItem("notiClick");
-    if (localStorage.getItem("notiClick") === "true") {
-        notification.classList.add("clicked");
-    } else {
-        notification.classList.remove("clicked");
-    }
-    setTimeout(() => {
-        notification.classList.remove("clicked");
-        localStorage.setItem("notiClick", false);
-    }, 20000);
-    darkLight();
-});
-
-//scroll to top
-goTop.classList.add("scroll-to-top");
-fire.classList.add("fire");
-document.querySelector(".content").append(goTop);
-goTop.append(fire);
-
-window.addEventListener("scroll", () => {
-    if (window.scrollY >= 600) {
-        goTop.classList.add("active");
-    } else {
-        goTop.classList.remove("active");
-    }
-});
-
-goTop.addEventListener("click", function () {
-    window.scrollTo({ left: 0, top: 0 });
-    goTop.style.setProperty("bottom", "85vh");
-    setTimeout(function () {
-        goTop.style.setProperty("bottom", "40px");
-    }, 1000);
-});
-
-//post like / task delete
-let like;
-const deleteIcon = document.querySelector(".icon-done"),
-    heartIcon = document.querySelector(".heart");
-
-if (currentPage === "Dashboard") {
-    deleteIcon.addEventListener("click", function () {
-        document.querySelector(".done").remove();
-    });
-    heartIcon.addEventListener("click", function () {
-        if (heartIcon.classList.contains("fa-regular")) {
-            heartIcon.classList.remove("fa-regular");
-            heartIcon.classList.add("fa", "c-red");
-            like = true;
-        } else {
-            heartIcon.classList.remove("fa", "c-red");
-            heartIcon.classList.add("fa-regular");
-            like = false;
-        }
-        localStorage.setItem("like", like);
-    });
-}
-
-//theme change
 let meta = document.getElementById("meta"),
     checkbox = document.querySelector(".toggle-checkbox"),
     darkModeOn = false,
     theme;
 
-if (currentPage === "Settings") {
-    checkbox.onclick = function () {
-        this.classList.toggle("dark");
-        this.classList.contains("dark")
-            ? (this.value = "dark")
-            : (this.value = "light");
-        theme = this.value;
-        change();
-        darkLight();
-    };
-}
+let divTime = document.createElement("div"),
+    spanTime = document.createElement("span"),
+    spanMonth = document.createElement("span"),
+    spanDay = document.createElement("span");
 
-function change() {
-    meta.content = theme;
-    if (meta.content === "dark") {
-        document.body.classList.add("dark");
-        document.body.classList.remove("light");
-    } else {
-        document.body.classList.remove("dark");
-        document.body.classList.add("light");
-    }
-    localStorage.setItem("theme", theme);
-}
+const deleteIcon = document.querySelector(".icon-done"),
+    heartIcon = document.querySelector(".heart");
 
 const root = document.documentElement;
+
 //light colors
 let mainLight = getComputedStyle(root).getPropertyValue("--main-color"),
     lightBlue = getComputedStyle(root).getPropertyValue("--blue-color"),
@@ -167,6 +70,127 @@ let lightArr = [
         darkWhite,
     ];
 
+let notification = document.querySelector(".notification"),
+    not = document.createElement("div"),
+    headNoti = document.createElement("h3"),
+    notiHolder = document.createElement("div"),
+    closeNoti = document.createElement("span"),
+    click = false,
+    spanNoti = document.createElement("span");
+
+// window load
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        h.classList.add("hover");
+    }, 10);
+    meta.content = localStorage.getItem("theme");
+    theme = localStorage.getItem("theme");
+    if (currentPage === "Settings") {
+        if (meta.content === "dark") {
+            checkbox.setAttribute("checked", "");
+            checkbox.classList.add("dark");
+        } else {
+            checkbox.removeAttribute("checked");
+            checkbox.classList.remove("dark");
+        }
+    }
+    darkLight();
+});
+
+//notification status
+if (localStorage.getItem("notiClick")) {
+    click = localStorage.getItem("notiClick");
+    if (localStorage.getItem("notiClick") === "true") {
+        notification.classList.add("clicked");
+    } else {
+        notification.classList.remove("clicked");
+    }
+    setTimeout(() => {
+        notification.classList.remove("clicked");
+        localStorage.setItem("notiClick", false);
+    }, 20000);
+}
+
+//saving post like
+if (localStorage.getItem("like")) {
+    if (currentPage === "Dashboard") {
+        if (localStorage.getItem("like") === "true") {
+            heartIcon.classList.remove("fa-regular");
+            heartIcon.classList.add("fa", "c-red");
+        } else {
+            heartIcon.classList.remove("fa", "c-red");
+            heartIcon.classList.add("fa-regular");
+        }
+    }
+}
+//scroll to top
+goTop.classList.add("scroll-to-top");
+fire.classList.add("fire");
+document.querySelector(".content").append(goTop);
+goTop.append(fire);
+
+window.addEventListener("scroll", () => {
+    if (window.scrollY >= 600) {
+        goTop.classList.add("active");
+    } else {
+        goTop.classList.remove("active");
+    }
+});
+
+goTop.addEventListener("click", function () {
+    window.scrollTo({ left: 0, top: 0 });
+    goTop.style.setProperty("bottom", "85vh");
+    setTimeout(function () {
+        goTop.style.setProperty("bottom", "40px");
+    }, 1000);
+});
+
+//post like / task delete
+
+if (currentPage === "Dashboard") {
+    deleteIcon.addEventListener("click", function () {
+        document.querySelector(".done").remove();
+    });
+    heartIcon.addEventListener("click", function () {
+        if (heartIcon.classList.contains("fa-regular")) {
+            heartIcon.classList.remove("fa-regular");
+            heartIcon.classList.add("fa", "c-red");
+            like = true;
+        } else {
+            heartIcon.classList.remove("fa", "c-red");
+            heartIcon.classList.add("fa-regular");
+            like = false;
+        }
+        localStorage.setItem("like", like);
+    });
+}
+
+//theme change
+
+if (currentPage === "Settings") {
+    checkbox.onclick = function () {
+        this.classList.toggle("dark");
+        this.classList.contains("dark")
+            ? (this.value = "dark")
+            : (this.value = "light");
+        theme = this.value;
+        change();
+        darkLight();
+    };
+}
+
+function change() {
+    meta.content = theme;
+    if (meta.content === "dark") {
+        document.body.classList.add("dark");
+        document.body.classList.remove("light");
+    } else {
+        document.body.classList.remove("dark");
+        document.body.classList.add("light");
+    }
+    localStorage.setItem("theme", theme);
+}
+
 function darkLight() {
     rootName.forEach(function (name, i) {
         if (localStorage.getItem("theme") === "dark") {
@@ -194,13 +218,6 @@ function darkLight() {
 }
 
 //notification
-let notification = document.querySelector(".notification"),
-    not = document.createElement("div"),
-    headNoti = document.createElement("h3"),
-    notiHolder = document.createElement("div"),
-    closeNoti = document.createElement("span"),
-    click = false,
-    spanNoti = document.createElement("span");
 
 notiHolder.classList.add("notification-content");
 closeNoti.innerText = "Close";
@@ -231,10 +248,6 @@ closeNoti.addEventListener("click", () => {
 });
 
 //time
-let divTime = document.createElement("div"),
-    spanTime = document.createElement("span"),
-    spanMonth = document.createElement("span"),
-    spanDay = document.createElement("span");
 
 spanTime.id = "span-date";
 spanDay.id = "span-day";
@@ -264,13 +277,13 @@ const shortMonthNames = [
         "Dec",
     ],
     shortDayNames = [
+        "Sunday",
         "Monday",
         "Tuesday",
         "Wednesday",
         "Thursday",
         "Friday",
-        "Saturday",
-        "Sunday",
+        "Saturday"
     ];
 
 function updateTime() {
@@ -311,7 +324,6 @@ setInterval(updateTime, 1000);
 
 //open side bar on mobile
 
-let menu = document.querySelector(".menu");
 menu.addEventListener("click", () => {
     menu.classList.toggle("active");
     if (menu.classList.contains("active")) {
