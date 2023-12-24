@@ -92,7 +92,7 @@ window.addEventListener("load", () => {
             Author.innerText = data.author;
             divContent.innerText = data.content;
         })
-        .catch(() => alert("error fetching"));
+        .catch(() => console.log("error fetching"));
 
     setTimeout(() => {
         h.classList.add("hover");
