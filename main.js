@@ -80,7 +80,7 @@ let notification = document.querySelector(".notification"),
     divContent = document.querySelector(".post-content"),
     Author = document.querySelector(".author"),
     postTime = document.querySelector(".post-time"),
-    api = "http://api.quotable.io/random";
+    api = "https://api.quotable.io/random";
 
 // window load
 window.addEventListener("load", () => {
