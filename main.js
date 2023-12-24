@@ -76,10 +76,24 @@ let notification = document.querySelector(".notification"),
     notiHolder = document.createElement("div"),
     closeNoti = document.createElement("span"),
     click = false,
-    spanNoti = document.createElement("span");
+    spanNoti = document.createElement("span"),
+    divContent = document.querySelector(".post-content"),
+    Author = document.querySelector(".author"),
+    postTime = document.querySelector(".post-time"),
+    api = "http://api.quotable.io/random";
 
 // window load
 window.addEventListener("load", () => {
+    fetch(api)
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+            postTime.innerHTML = data.dateAdded;
+            Author.innerText = data.author;
+            divContent.innerText = data.content;
+        })
+        .catch(() => alert("error fetching"));
+
     setTimeout(() => {
         h.classList.add("hover");
     }, 10);
@@ -283,7 +297,7 @@ const shortMonthNames = [
         "Wednesday",
         "Thursday",
         "Friday",
-        "Saturday"
+        "Saturday",
     ];
 
 function updateTime() {
